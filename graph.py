@@ -119,10 +119,9 @@ for x in article["authors"]:
   i+=1
 
 docAut
-
 docAut.sum()
-
 docAut.to_csv("docAut.csv", sep='\t')
 
-
-
+# co_auteur
+docAutTransposé = np.transpose(docAut)
+co_Auteur = docAutTransposé.dot(docAut)
