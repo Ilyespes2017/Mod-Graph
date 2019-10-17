@@ -89,7 +89,7 @@ import pandas as pd
   # reading csv file  
 article = pd.read_csv("article.csv", sep="\t")
 auteur =  pd.read_csv("auteur.csv", sep = ";")
-
+# Petit Summary
 article.describe()
 
 article.groupby('year').agg('count')
@@ -102,26 +102,18 @@ article.dropna(subset=['abstract'], inplace = True)
 auteur['Affiliation'].replace('',np.nan, inplace=True)
 auteur.dropna(subset=['Affiliation'], inplace = True)
 
-article
-
+#Data initialisé avec des 0 et noms d'auteurs en colonnes 
 docAut = pd.DataFrame(np.zeros((article.shape[0],len(auteur["Authors_Name"]))), columns =  auteur["Authors_Name"])
-
-docAut
 
 i=0
 for x in article["authors"]:
-  print(i)
   for j in x.split(", "):
-    print(j)
     if (np.sum(j == auteur["Authors_Name"])>0):
-      print("trouvé")
       docAut.ix[i,j] =1 
   i+=1
 
 docAut
-
 docAut.sum()
-
 docAut.to_csv("docAut.csv", sep='\t')
 
 
